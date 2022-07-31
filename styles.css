@@ -1,0 +1,40 @@
+@font-face {
+	font-family: 'upheaval';
+	src: url('./fonts/UpheavalPro.ttf');
+}
+@font-face {
+	font-family: 'arcade-out';
+	src: url('./fonts/8-bit-Arcade-Out.ttf');
+}
+
+:root {
+	--yellow: #faee1c;
+	--light-blue: #46c3db;
+	--dark-blue: #482ff7;
+}
+* {
+	box-sizing: border-box;
+}
+h5 {
+	letter-spacing: 8px;
+}
+body {
+	overflow-x: hidden;
+	font-family: 'upheaval', monospace;
+	margin: 0;
+	padding: 0;
+	text-transform: capitalize;
+	font-size: 2rem;
+	background-color: #fdfdfd;
+}
+
+.btn {
+	font-family: 'arcade-out';
+	border: solid;
+	border-width: 0px 0.5rem 4px 0;
+	border-color: #111112 #898787;
+	background-color: var(--yellow);
+}
+p {
+	cursor: default;
+}
