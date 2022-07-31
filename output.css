@@ -596,12 +596,20 @@ video {
   margin-top: 1.5rem;
 }
 
+.mb-auto {
+  margin-bottom: auto;
+}
+
 .flex {
   display: flex;
 }
 
 .h-screen {
   height: 100vh;
+}
+
+.min-h-screen {
+  min-height: 100vh;
 }
 
 .w-fit {
