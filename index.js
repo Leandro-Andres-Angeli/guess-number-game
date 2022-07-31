@@ -102,9 +102,9 @@ const handleClick = () => {
 						scorePoints,
 					])
 			  );
+	finishedGame.outOfPoints = scorePoints <= 0;
 	(finishedGame.wonGame || finishedGame.outOfPoints) &&
 		handleEndGame(finishedGame);
-	finishedGame.outOfPoints = scorePoints < 0;
 };
 document.querySelector('.check').addEventListener('click', handleClick);
 highestScoreDisplay.innerText = highestScoreValue() || 0;
