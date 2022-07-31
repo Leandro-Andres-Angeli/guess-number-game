@@ -7,6 +7,7 @@ const playAgain = document.querySelector('.play-again');
 const highestScoreDisplay = document.querySelector('.high-score');
 let scorePoints = 20;
 score.innerText = scorePoints;
+
 const numberMask = IMask(guess, {
 	mask: Number, // enable number mask
 
@@ -32,11 +33,9 @@ const changeStylesWhenEndsGame = (styles) => {
 };
 const highestScoreValue = () =>
 	sessionStorage.getItem('scores') === null
-		? 0
+		? false
 		: Math.max(...JSON.parse(sessionStorage.getItem('scores')));
 const checkIfScoreIsHighest = (scoreStoredInSession, currentScore) => {
-	console.log(scoreStoredInSession, 'session');
-	console.log(currentScore, 'current');
 	if (currentScore >= scoreStoredInSession) {
 		return document
 			.querySelector('.game_display_score')
@@ -52,7 +51,7 @@ function handleEndGame(gameData) {
 	guess.setAttribute('disabled', 'true');
 	checkButton.setAttribute('disabled', 'true');
 	const color = won === true && lose !== true ? 'green' : 'red';
-	console.log(color);
+
 	const stylesArray = [
 		`bg-${color}-500`,
 		'text-white',
@@ -66,13 +65,15 @@ function handleEndGame(gameData) {
 
 	h1.innerText = won === true ? 'number is...' : 'game-over ';
 
-	won && checkIfScoreIsHighest(highestScoreValue(), scorePoints);
+	won &&
+		((highestScoreDisplay.innerText = highestScoreValue() || scorePoints),
+		checkIfScoreIsHighest(highestScoreValue(), scorePoints));
 }
 const randomNum = Math.floor(Math.random() * (20 - 0 + 1)) + 0;
 const changeMessage = (msg, element) => {
 	element.innerHTML = msg;
 };
-console.log(guess);
+
 document.addEventListener('load', changeMessage('start guessing', message));
 guess.addEventListener('keyup', handleChange);
 guess.addEventListener('focus', () => changeMessage('insert number', message));
@@ -81,7 +82,7 @@ playAgain.addEventListener('click', () => location.reload());
 
 const handleClick = () => {
 	const valueInput = Number(guess.value);
-	console.log(randomNum);
+
 	const finishedGame = { wonGame: null, outOfPoints: null, scorePoints };
 	valueInput !== randomNum
 		? changeMessage('wrong number! ', message)
@@ -89,7 +90,7 @@ const handleClick = () => {
 		  changeMessage(randomNum, number),
 		  (finishedGame.wonGame = true));
 	scorePoints--;
-	finishedGame.outOfPoints = scorePoints <= 0;
+
 	score.innerText = scorePoints;
 	if (finishedGame.wonGame)
 		sessionStorage.getItem('scores') === null
@@ -103,7 +104,7 @@ const handleClick = () => {
 			  );
 	(finishedGame.wonGame || finishedGame.outOfPoints) &&
 		handleEndGame(finishedGame);
+	finishedGame.outOfPoints = scorePoints < 0;
 };
 document.querySelector('.check').addEventListener('click', handleClick);
-
-highestScoreDisplay.innerText = highestScoreValue();
+highestScoreDisplay.innerText = highestScoreValue() || 0;
