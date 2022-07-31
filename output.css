@@ -558,16 +558,12 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
-.static {
-  position: static;
-}
-
-.absolute {
-  position: absolute;
-}
-
 .relative {
   position: relative;
+}
+
+.m-auto {
+  margin: auto;
 }
 
 .mx-auto {
@@ -596,16 +592,12 @@ video {
   margin-top: 1.5rem;
 }
 
-.mb-auto {
-  margin-bottom: auto;
+.mt-auto {
+  margin-top: auto;
 }
 
 .flex {
   display: flex;
-}
-
-.h-screen {
-  height: 100vh;
 }
 
 .min-h-screen {
@@ -816,10 +808,6 @@ video {
 }
 
 @media (min-width: 768px) {
-  .md\:absolute {
-    position: absolute;
-  }
-
   .md\:mx-2 {
     margin-left: 0.5rem;
     margin-right: 0.5rem;
