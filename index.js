@@ -73,7 +73,7 @@ const randomNum = Math.floor(Math.random() * (20 - 0 + 1)) + 0;
 const changeMessage = (msg, element) => {
 	element.innerHTML = msg;
 };
-
+console.log(randomNum);
 document.addEventListener('load', changeMessage('start guessing', message));
 guess.addEventListener('keyup', handleChange);
 guess.addEventListener('focus', () => changeMessage('insert number', message));
@@ -85,12 +85,10 @@ const handleClick = () => {
 
 	const finishedGame = { wonGame: null, outOfPoints: null, scorePoints };
 	valueInput !== randomNum
-		? changeMessage('wrong number! ', message)
+		? (scorePoints--, changeMessage('wrong number! ', message))
 		: (changeMessage('right number ! 🤡🤡', message),
 		  changeMessage(randomNum, number),
 		  (finishedGame.wonGame = true));
-	scorePoints--;
-
 	score.innerText = scorePoints;
 	if (finishedGame.wonGame)
 		sessionStorage.getItem('scores') === null
@@ -102,7 +100,7 @@ const handleClick = () => {
 						scorePoints,
 					])
 			  );
-	finishedGame.outOfPoints = scorePoints <= 0;
+	finishedGame.outOfPoints = 0 >= scorePoints;
 	(finishedGame.wonGame || finishedGame.outOfPoints) &&
 		handleEndGame(finishedGame);
 };
